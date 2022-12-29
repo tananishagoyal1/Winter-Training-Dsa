@@ -1,0 +1,39 @@
+LinkedListNode<int>*reverse(LinkedListNode<int>* head){
+LinkedListNode<int>* curr=head;
+   LinkedListNode<int>*prev=NULL;
+   LinkedListNode<int>*forward=NULL;
+    while(curr!=NULL){
+      forward=curr->next;
+        curr->next=prev;
+        prev=curr;
+        curr=forward;
+    
+    }
+    return prev;
+    }
+LinkedListNode<int>* removeKthNode(LinkedListNode<int> *head, int K)
+{
+    if(head==NULL) return head;
+    if(K==0) return head;
+    LinkedListNode<int>*temp=reverse(head);
+        if( K==1){
+        LinkedListNode<int>*temp1=temp;
+        temp=temp->next;
+        delete temp1;
+            return reverse(temp);
+    }
+  else{ 
+    LinkedListNode<int>*curr=temp;
+      LinkedListNode<int>*prev=NULL;
+       int count=1;
+       while(count<K){
+         prev=curr;
+           curr=curr->next;
+            count++;
+        }
+        prev->next=curr->next;
+        delete (curr);
+      }
+    LinkedListNode<int>* temp2=reverse(temp);
+    return temp2;
+};
